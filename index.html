@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HighLine — Asian football, tactically read.</title>
+<meta name="description" content="Data analytics for Asian football. V-League, ISL, AFC Champions League, and the players carrying Asia abroad. Compiled with the same rigor The Athletic gives Europe.">
+<meta property="og:title" content="HighLine — Asian football, tactically read.">
+<meta property="og:description" content="Data analytics for Asian football and the players abroad. V-League, ISL, AFC, MLS, SPL.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://highline.penwin.vn">
+<meta property="og:image" content="https://highline.penwin.vn/assets/banner_x_1500x500.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@highlinefc">
+<link rel="icon" type="image/png" href="/assets/favicon_64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #E5FF00;
+    --bg: #0E1116;
+    --accent: #3CC2FF;
+    --fg: #F5F7FA;
+    --muted: #7A8699;
+    --grid: #1A2030;
+    --success: #37D399;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.55;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  /* Header */
+  header {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--grid);
+  }
+  header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-weight: 900;
+    font-size: 22px;
+    color: var(--primary);
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+  .logo .accent { color: var(--accent); margin: 0 1px; }
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    margin-left: 28px;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--fg); }
+  /* Hero */
+  .hero {
+    padding: 100px 0 80px;
+    text-align: center;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(229,255,0,0.06) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-content { position: relative; z-index: 1; }
+  .hero h1 {
+    font-size: clamp(48px, 8vw, 92px);
+    font-weight: 900;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    margin-bottom: 18px;
+  }
+  .hero h1 .yellow { color: var(--primary); }
+  .hero .tagline {
+    font-size: clamp(18px, 2.5vw, 24px);
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+  .hero .pitch {
+    font-size: 17px;
+    color: var(--fg);
+    max-width: 620px;
+    margin: 0 auto 40px;
+    opacity: 0.92;
+  }
+  .cta-row {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 26px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: transform 0.15s, background 0.15s;
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: var(--bg);
+  }
+  .btn-primary:hover { transform: translateY(-2px); background: #f5ff4d; }
+  .btn-ghost {
+    border: 1px solid var(--muted);
+    color: var(--fg);
+  }
+  .btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
+  .btn .arrow { margin-left: 6px; }
+  /* Pillars */
+  .pillars {
+    padding: 80px 0;
+    border-top: 1px solid var(--grid);
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--primary);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+    text-align: center;
+  }
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 32px;
+  }
+  .pillar {
+    padding: 28px 24px;
+    background: rgba(229, 255, 0, 0.025);
+    border: 1px solid var(--grid);
+    border-radius: 8px;
+    transition: border-color 0.2s;
+  }
+  .pillar:hover { border-color: var(--primary); }
+  .pillar h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .pillar p {
+    font-size: 14.5px;
+    color: var(--fg);
+    opacity: 0.85;
+    line-height: 1.6;
+  }
+  /* Sample data */
+  .data-sample {
+    padding: 80px 0;
+    border-top: 1px solid var(--grid);
+  }
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+  }
+  .stat-card {
+    padding: 24px;
+    background: var(--grid);
+    border-radius: 6px;
+    text-align: center;
+  }
+  .stat-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .stat-source {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 8px;
+    font-style: italic;
+  }
+  /* Footer */
+  footer {
+    padding: 60px 0 40px;
+    border-top: 1px solid var(--grid);
+    text-align: center;
+  }
+  footer .small {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  footer .links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 16px;
+  }
+  footer .links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+  }
+  footer .links a:hover { color: var(--primary); }
+  @media (max-width: 600px) {
+    header nav { display: none; }
+    .hero { padding: 60px 0 50px; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="/" class="logo">HighLine<span class="accent">·</span></a>
+      <nav>
+        <a href="https://highlinefc.substack.com">Substack</a>
+        <a href="https://x.com/highlinefc">X</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-content">
+      <h1><span class="yellow">Asian football,</span><br>tactically read.</h1>
+      <p class="tagline">Data analytics for the leagues everyone else ignores.</p>
+      <p class="pitch">
+        V-League, ISL, AFC Champions League, Saudi Pro League, MLS — and the Asian
+        players carrying their nations abroad. Compiled with the same statistical
+        rigor The Athletic gives the Premier League.
+      </p>
+      <div class="cta-row">
+        <a href="https://highlinefc.substack.com" class="btn btn-primary">
+          Read on Substack <span class="arrow">→</span>
+        </a>
+        <a href="https://x.com/highlinefc" class="btn btn-ghost">
+          Follow on X <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="pillars" id="about">
+    <div class="container">
+      <div class="section-label">— what we cover</div>
+      <div class="pillar-grid">
+        <div class="pillar">
+          <h3>Asian Players Abroad</h3>
+          <p>Radar profiling and tactical role analysis for AFC players in Europe, MLS and Saudi Pro League. Son Heung-min, Mitoma, Kim Min-jae, Lee Kang-in, Salem Al-Dawsari and more.</p>
+        </div>
+        <div class="pillar">
+          <h3>Asian Domestic Football</h3>
+          <p>V-League, Indian Super League, Thai League, Saudi Pro League. The data depth these competitions have been missing.</p>
+        </div>
+        <div class="pillar">
+          <h3>Tactical Comparisons</h3>
+          <p>Head-to-head radars between players, leagues, eras. The questions data can settle — and the ones it can't.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="data-sample">
+    <div class="container">
+      <div class="section-label">— signal of the moment</div>
+      <div class="stat-row">
+        <div class="stat-card">
+          <span class="stat-value">61</span>
+          <div class="stat-label">CAHN points after 24 V-League matches</div>
+          <div class="stat-source">11-point lead. Title sealed.</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">28</span>
+          <div class="stat-label">Ronaldo goals in 2025/26 SPL</div>
+          <div class="stat-source">First Saudi crown after 4 years</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">0</span>
+          <div class="stat-label">Al-Hilal losses all SPL season</div>
+          <div class="stat-source">9 draws cost them the title</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">94%</span>
+          <div class="stat-label">Kim Min-jae passing accuracy at Bayern</div>
+          <div class="stat-source">Top percentile vs Bundesliga CBs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="small">
+        Compiled by HighLine · Data sourced from Sofascore · Brand v0.1
+      </div>
+      <div class="small">
+        <em>Asian football, tactically read.</em>
+      </div>
+      <div class="links">
+        <a href="https://highlinefc.substack.com">Newsletter</a>
+        <a href="https://x.com/highlinefc">X</a>
+        <a href="mailto:hello@penwin.vn">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
