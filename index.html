@@ -30,6 +30,8 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
+  /* Offset for sticky header when jumping to section via anchor */
+  section[id], div[id="method"] { scroll-margin-top: 80px; }
   body {
     background: var(--bg);
     color: var(--fg);
@@ -46,7 +48,7 @@
   }
   /* Header */
   header {
-    padding: 22px 0;
+    padding: 16px 0;
     border-bottom: 1px solid var(--grid);
     position: sticky;
     top: 0;
@@ -67,9 +69,11 @@
     font-size: 22px;
     color: var(--primary);
     letter-spacing: -0.01em;
+    transition: opacity 0.2s;
   }
+  .logo:hover { opacity: 0.85; }
   .logo img {
-    height: 28px;
+    height: 44px;
     width: auto;
     display: block;
   }
@@ -880,10 +884,10 @@
   <section class="block" id="about">
     <div class="container">
       <div class="section-label">— Who's behind this</div>
-      <h2 class="section-title">Engineer-built. Analyst-voiced.</h2>
+      <h2 class="section-title">Football-obsessed. Data-honest.</h2>
       <div class="about-grid">
         <div class="about-card">
-          <h3>Phạm Thành — Founder</h3>
+          <h3>Penwin — Founder</h3>
           <p>
             Two decades of football obsession, one realisation that changed how I watch
             the game: Liverpool didn't win because Klopp shouted louder — they won because
